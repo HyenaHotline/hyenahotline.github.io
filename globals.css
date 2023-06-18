@@ -37,6 +37,10 @@ body {
     grid-template-areas: "A" "B";
 }
 
+#background {
+    grid-area: 1 / 1 / 3 / 2;
+}
+
 #navigation-bar {
     grid-area: A;
 }

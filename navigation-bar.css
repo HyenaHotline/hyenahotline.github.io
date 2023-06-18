@@ -6,7 +6,9 @@
     width: 100%;
     font-size: 2rem;
     font-weight: bold;
-    box-shadow: 0px 2px 4px #0008;
+    box-shadow: 0px 2px 4px #0006;
+    backdrop-filter: blur(16px) brightness(0.9);
+    background: #0004;
     padding: 0.1em;
     gap: 0.1em;
 

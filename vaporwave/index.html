@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaporwave Background</title>
+
+    <style>
+        :root {
+            --cameraRZ: 0deg;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        body {
+            margin: 0px;
+            overflow: hidden;
+            background: linear-gradient(calc(var(--cameraRZ) + 180deg), #FB5E6B 0%, #EB928E 35%, #FCB69E 40%, #501C29 75%, #151D28 100%);
+
+            display: grid;
+        }
+        body > * {
+            grid-area: 1/1/2/2;
+        }
+
+        #canvas, #temp-image {
+            transition: opacity 0.25s linear;
+        }
+        #temp-image {
+            top: 0px;
+            left: 0px;
+            position: fixed;
+            z-index: 1;
+
+            height: 100%;
+            filter: blur(calc((1vw + 1vh) / 8));
+        }
+
+        body.loaded #temp-image {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+
+    
+<script>
+    function initImage() {
+        const tempImage = document.querySelector("#temp-image");
+
+        function resize() {
+            const tempImageSize = tempImage.getBoundingClientRect();
+            let sizeMultiplier = innerWidth / tempImageSize.width;
+
+            if(tempImageSize.height * sizeMultiplier < innerHeight) {
+                sizeMultiplier = innerHeight / tempImageSize.height;
+            }
+
+            tempImage.style.width = tempImageSize.width * sizeMultiplier + "px";
+            tempImage.style.height = tempImageSize.height * sizeMultiplier + "px";
+
+            tempImage.style.left = (innerWidth - tempImageSize.width * sizeMultiplier) / 2 + "px";
+            tempImage.style.top = (innerHeight - tempImageSize.height * sizeMultiplier) / 2 + "px";
+
+            console.log(sizeMultiplier, tempImageSize.width, tempImageSize.height);
+        }
+
+        resize();
+        window.addEventListener("resize", resize);
+
+        
+        const mainScript = document.createElement("script");
+        mainScript.setAttribute("type", "module");
+        mainScript.setAttribute("src", "main.js");
+
+        setTimeout(() => {
+            document.body.appendChild(mainScript);
+        }, 1);
+    }
+    window.addEventListener("load", initImage);
+</script>
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@v0.152.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@v0.152.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <img id="temp-image" src="./placeholder.png"></img>
+</body>
+</html>
