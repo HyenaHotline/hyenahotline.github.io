@@ -1,0 +1,9 @@
+@import url(/globals.css);
+
+#prices-table {
+    border-spacing: 0.5em;
+}
+#prices-table tr td:first-child {
+    text-align: right;
+    font-weight: bold;
+}

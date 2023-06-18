@@ -1,0 +1,29 @@
+@import url(/navigation-bar.css);
+@import url(/overrides.css);
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+
+    background: black;
+    color: white;
+
+    display: grid;
+    grid-template-rows: max-content minmax(0, 1fr);
+    grid-template-areas: "A" "B";
+}
+
+#navigation-bar {
+    grid-area: A;
+}
+
+#content {
+    grid-area: B;
+
+    padding: 1em;
+    box-sizing: border-box;
+}

@@ -1,0 +1,23 @@
+#navigation-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    width: 100%;
+}
+
+#navigation-bar .navigation-page {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+
+    opacity: 0.5;
+}
+
+#navigation-bar .navigation-page.selected {
+    opacity: 100;
+}
+
+#navigation-bar .navigation-page:hover {
+    text-decoration: underline;
+}
