@@ -1,1 +1,33 @@
 @import url(/globals.css);
+
+.portfolio-container {
+    text-align: center;
+}
+
+.portfolio-image {
+    width: max-content;
+
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25em;
+
+    border: 1px solid #fff;
+    margin: 0.25em;
+    padding: 0.25em;
+    box-sizing: border-box;
+}
+.portfolio-image .image {
+    height: 300px;
+    width: fit-content;
+    align-self: center
+}
+
+.portfolio-image .commissioner {
+    opacity: 0.5;
+}
+.portfolio-image:hover .commissioner {
+    opacity: 1;
+}
+.portfolio-image .commissioner::before {
+    content: "Commissioned by ";
+}

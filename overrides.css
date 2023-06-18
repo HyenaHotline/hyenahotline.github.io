@@ -1,7 +1,9 @@
 hr {
-    border-color: #444;
+    border-color: #fff;
+    border-style: solid;
 }
 
 a {
     color: #7198ea;
+    text-shadow: 2px 2px 0px #000;
 }
