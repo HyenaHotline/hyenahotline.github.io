@@ -29,7 +29,7 @@ body {
 
     margin: 0px;
 
-    background: linear-gradient(to bottom, #971397 0%, #FF6130 100%);
+    background: #640718;
     color: white;
 
     display: grid;
@@ -39,6 +39,9 @@ body {
 
 #background {
     grid-area: 1 / 1 / 3 / 2;
+    z-index: -1;
+    border: none;
+    overflow: hidden;
 }
 
 #navigation-bar {
