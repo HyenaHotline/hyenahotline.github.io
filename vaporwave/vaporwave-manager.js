@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 import * as Simplex from "https://cdn.skypack.dev/simplex-noise@4.0.1";
 
 class VaporwaveManager {
@@ -29,20 +30,29 @@ class VaporwaveManager {
         this.scene.fog = new THREE.Fog(0xD33057, 0, 1000);
         this.skydome = new THREE.Mesh(new THREE.SphereGeometry(4000, 64, 32), new THREE.MeshBasicMaterial({ color: 0xFB5C6A, side: THREE.BackSide, fog: false }));
         this.cameraLight = new THREE.PointLight(0xffffff, 1, 250, 2);
-    
-        const city = new THREE.Group();
-        const cityMaterial = new THREE.MeshToonMaterial({ color: 0x7F031E });
         
-        const hemiLight = new THREE.HemisphereLight(0xFB5C6A, 0xEB928E, 0.1);
+        this.hemiLight = new THREE.HemisphereLight(0xFB5C6A, 0xEB928E, 0.1);
+
+        this.createCity();
+
+        this.scene.add(plane);
+        this.scene.add(this.city);
+        this.scene.add(this.cameraLight);
+        this.scene.add(this.hemiLight);
+
+        this.camera.position.set(0, 10, 10);
+    }
+
+    createCity() {
+        const geometryList = [];
     
         for (let i = 0; i < this.skyscraperCount; i++) {
             const height = 50 + (Math.random() ** 5) * 150;
             const size = 10 + Math.round(Math.random() * 3) * 5;
             const skyscraperGeometry = new THREE.BoxGeometry(size, height, size);
-            const skyscraper = new THREE.Mesh(skyscraperGeometry, cityMaterial);
+            
             const gridSize = 48;
             const gridRandomOffset = gridSize * 0.5;
-            city.add(skyscraper);
     
             let x, z;
             const isInvalid = () => {
@@ -57,15 +67,16 @@ class VaporwaveManager {
                 z = Math.round((Math.random() * 2 - 1) * this.worldSize / gridSize) * gridSize + (Math.random() - 0.5) * gridRandomOffset;
             } while (isInvalid())
     
-            skyscraper.position.set(x, height * 0.5 + this.getHeightValue(x, z) - 5, z);
+            const matrix = new THREE.Matrix4();
+            matrix.makeTranslation(x, height * 0.5 + this.getHeightValue(x, z) - 5, z);
+            skyscraperGeometry.applyMatrix4(matrix);
+
+            geometryList.push(skyscraperGeometry);
         }
 
-        this.scene.add(plane);
-        this.scene.add(city);
-        this.scene.add(this.cameraLight);
-        this.scene.add(hemiLight);
-
-        this.camera.position.set(0, 10, 10);
+        const material = new THREE.MeshToonMaterial({ color: 0x7F031E });
+        const geometry = BufferGeometryUtils.mergeGeometries(geometryList, false);
+        this.city = new THREE.Mesh(geometry, material);
     }
     
     calculateTangent(x, z) {
