@@ -1,6 +1,14 @@
 @import url(/globals.css);
 
+#content {
+    justify-content: unset;
+}
+
+
 .portfolio-container {
+    text-align: center;
+}
+.display-container h1 {
     text-align: center;
 }
 
@@ -11,9 +19,8 @@
     flex-direction: column;
     gap: 0.25em;
 
-    border: 1px solid #fff;
-    margin: 0.25em;
-    padding: 0.25em;
+    margin: 0.5em;
+    padding: 0.5em 1em;
     box-sizing: border-box;
 }
 .portfolio-image .image {

@@ -2,8 +2,14 @@
 
 #prices-table {
     border-spacing: 0.5em;
+
+    align-self: center;
 }
 #prices-table tr td:first-child {
     text-align: right;
     font-weight: bold;
+}
+#prices-table tr td:first-child, #prices-table tr th:not(:empty) {
+    backdrop-filter: brightness(0.75);
+    padding: 0.25em 0.5em;
 }

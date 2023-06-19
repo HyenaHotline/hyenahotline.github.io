@@ -1,1 +1,25 @@
 @import url(/globals.css);
+
+#commission-rules {
+    text-align: center;
+}
+
+#commission-rules ul {
+    padding: 0px 1em;
+    list-style: none;
+}
+
+#commission-rules li {
+    width: 100%;
+    margin-bottom: 0.25em;
+    background: #0004;
+    padding: 0.25em;
+}
+
+#will-draw li {
+    border: 1px solid #0f0;
+}
+
+#wont-draw li {
+    border: 1px solid #f00;
+}

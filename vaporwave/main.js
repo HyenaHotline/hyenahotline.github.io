@@ -17,18 +17,31 @@ function render() {
     renderer.render(scene, camera);
 }
 
-renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector("#canvas"),
-    antialias: true,
-    alpha: true
-});
-renderer.setClearColor(0x000000, 0);
+function delay(time) {
+    return new Promise((res) => {
+        setTimeout(res, time);
+    });
+}
 
-vm = new VaporwaveManager(scene, camera);
-resize();
-window.addEventListener("resize", resize);
-requestAnimationFrame(render);
+async function main() {
+    renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector("#canvas"),
+        antialias: true,
+        alpha: true
+    });
+    renderer.setClearColor(0x000000, 0);
 
-setTimeout(() => {
+    vm = new VaporwaveManager(scene, camera, "walk");
+    await vm.init();
+    await delay(10);
+
+    resize();
+    window.addEventListener("resize", resize);
+    
+    await delay(10);
+    requestAnimationFrame(render);
+
+    await delay(10);
     document.body.classList.add("loaded");
-}, 1);
+}
+main();

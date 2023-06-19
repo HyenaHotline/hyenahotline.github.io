@@ -6,34 +6,55 @@
     width: 100%;
     font-size: 2rem;
     font-weight: bold;
-    box-shadow: 0px 2px 4px #0006;
     backdrop-filter: blur(16px) brightness(0.9);
     background: #0004;
-    padding: 0.1em;
-    gap: 0.1em;
 
     box-sizing: border-box;
 
     z-index: 10;
+
+    overflow-x: hidden;
 }
 
 #navigation-bar .navigation-page {
     text-decoration: none;
     cursor: pointer;
     color: white;
-    padding: 0.1em;
     width: 100%;
+    padding: 0.5em 0px;
     text-align: center;
-    backdrop-filter: blur(8px) brightness(0.5);
-    border-radius: 8px;
-
-    opacity: 0.5;
+}
+#navigation-bar .navigation-page.selected, #navigation-bar .navigation-page:active {
+    backdrop-filter: brightness(0.75);
+}
+#navigation-bar .navigation-page:active {
+    filter: brightness(0.75);
 }
 
-#navigation-bar .navigation-page.selected {
+#navigation-bar .navigation-page::before, #navigation-bar .navigation-page::after {
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.1s ease, right 0.1s ease, left 0.1s ease;
+
+    pointer-events: none;
+}
+#navigation-bar .navigation-page::before {
+    content: ">";
+    right: 2em;
+}
+#navigation-bar .navigation-page::after {
+    content: "<";
+    left: 2em;
+}
+#navigation-bar .navigation-page:hover::before {
     opacity: 1;
+    right: 0em;
+}
+#navigation-bar .navigation-page:hover::after {
+    opacity: 1;
+    left: 0em;
 }
 
-#navigation-bar .navigation-page:hover {
-    text-decoration: underline;
+#navigation-bar a {
+    border: none;
 }

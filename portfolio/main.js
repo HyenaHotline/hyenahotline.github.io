@@ -38,11 +38,11 @@ const placeholderCommissioners = [
     "@LunarDust",
     "@EnigmaJade"
 ];
-const placeholderCommissionTypes = [];
+const placeholderTypes = [];
 
 for(const type of ["Profile", "Bust", "Half-body", "Full-body"]) {
     for(const renderLevel of ["Sketch", "Lineart", "Flat-color", "Fully Shaded"]) {
-        placeholderCommissionTypes.push(type + " / " + renderLevel);
+        placeholderTypes.push(type + " / " + renderLevel);
     }
 }
 
@@ -54,7 +54,7 @@ const artwork = [
     //     caption: "A placeholder image for a square canvas",
     //     description: "A 1024x1024 test image",
     //     commission: false,
-    //     commissionType: "Bust / Flat-color",
+    //     type: "Bust / Flat-color",
     //     commissioner: "JohnDoe",
     //     commissionerLink: "https://example.com"
     // }
@@ -67,7 +67,7 @@ for(let i = 0; i < 100; i++) {
 
     if(randomPlaceholder.commission) {
         randomPlaceholder.commissioner = Math.random() > 0.2 ? placeholderCommissioners[Math.floor(Math.random() * placeholderCommissioners.length)] : null;
-        randomPlaceholder.commissionType = placeholderCommissionTypes[Math.floor(Math.random() * placeholderCommissionTypes.length)];
+        randomPlaceholder.type = placeholderTypes[Math.floor(Math.random() * placeholderTypes.length)];
 
         if(randomPlaceholder.commissioner != null) {
             randomPlaceholder.commissionerLink = Math.random() > 0.8 ? "https://example.com" : null;
@@ -85,12 +85,17 @@ window.addEventListener("load", e => {
     for(const work of artwork) {
         const elem = document.createElement("div");
         elem.classList.add("portfolio-image");
+        elem.classList.add("display-container");
 
         const image = document.createElement("img");
         image.classList.add("image");
         image.setAttribute("src", "/assets/portfolio/" + work.filename);
         image.setAttribute("alt", work.description);
         image.setAttribute("title", work.description);
+        
+        const workType = document.createElement("span");
+        workType.classList.add("commission-type");
+        workType.textContent = work.type;
 
         const caption = document.createElement("span");
         caption.classList.add("caption");
@@ -113,16 +118,13 @@ window.addEventListener("load", e => {
 
             commissioner.appendChild(commissionerName);
 
-            const commissionType = document.createElement("span");
-            commissionType.classList.add("commission-type");
-            commissionType.textContent = work.commissionType;
-
-            elem.appendChild(commissionType);
+            elem.appendChild(workType);
             elem.appendChild(image);
             elem.appendChild(caption);
             elem.appendChild(commissioner);
             commissionPieces.appendChild(elem);
         } else {
+            elem.appendChild(workType);
             elem.appendChild(image);
             elem.appendChild(caption);
             generalArt.appendChild(elem);

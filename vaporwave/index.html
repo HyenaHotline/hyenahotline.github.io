@@ -27,7 +27,7 @@
         }
 
         #canvas, #temp-image {
-            transition: opacity 0.25s linear;
+            transition: opacity 0.25s ease-in;
         }
         #temp-image {
             top: 0px;
@@ -37,6 +37,8 @@
 
             height: 100%;
             filter: blur(calc((1vw + 1vh) / 8));
+
+            transform: scale(1.1);
         }
 
         body.loaded #temp-image {

@@ -7,3 +7,12 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
 }
+.container.solid {
+    backdrop-filter: blur(8px) brightness(0.75);
+    padding: 1em;
+}
+
+.display-container {
+    padding: 0.5em;
+    background: #0004;
+}
