@@ -1,3 +1,6 @@
+import artwork from "./artwork.js";
+
+
 const placeholderWorks = [
     {
         filename: "1024x1024.png",
@@ -46,35 +49,22 @@ for(const type of ["Profile", "Bust", "Half-body", "Full-body"]) {
     }
 }
 
+function generatePlaceholderArt() {
+    for(let i = 0; i < 100; i++) {
+        const randomPlaceholder = placeholderWorks[Math.floor(Math.random() * placeholderWorks.length)];
+        randomPlaceholder.commission = Math.random() > 0.5;
 
+        if(randomPlaceholder.commission) {
+            randomPlaceholder.commissioner = Math.random() > 0.2 ? placeholderCommissioners[Math.floor(Math.random() * placeholderCommissioners.length)] : null;
+            randomPlaceholder.type = placeholderTypes[Math.floor(Math.random() * placeholderTypes.length)];
 
-const artwork = [
-    // {
-    //     filename: "1024x1024.png",
-    //     caption: "A placeholder image for a square canvas",
-    //     description: "A 1024x1024 test image",
-    //     commission: false,
-    //     type: "Bust / Flat-color",
-    //     commissioner: "JohnDoe",
-    //     commissionerLink: "https://example.com"
-    // }
-]
-
-
-for(let i = 0; i < 100; i++) {
-    const randomPlaceholder = placeholderWorks[Math.floor(Math.random() * placeholderWorks.length)];
-    randomPlaceholder.commission = Math.random() > 0.5;
-
-    if(randomPlaceholder.commission) {
-        randomPlaceholder.commissioner = Math.random() > 0.2 ? placeholderCommissioners[Math.floor(Math.random() * placeholderCommissioners.length)] : null;
-        randomPlaceholder.type = placeholderTypes[Math.floor(Math.random() * placeholderTypes.length)];
-
-        if(randomPlaceholder.commissioner != null) {
-            randomPlaceholder.commissionerLink = Math.random() > 0.8 ? "https://example.com" : null;
+            if(randomPlaceholder.commissioner != null) {
+                randomPlaceholder.commissionerLink = Math.random() > 0.8 ? "https://example.com" : null;
+            }
         }
+        const clone = Object.assign({}, randomPlaceholder);
+        artwork.push(clone);
     }
-    const clone = Object.assign({}, randomPlaceholder);
-    artwork.push(clone);
 }
 
 
@@ -101,30 +91,47 @@ window.addEventListener("load", e => {
         caption.classList.add("caption");
         caption.textContent = work.caption;
 
-        if(work.commission) {
+        const dateCreatedElement = document.createElement("span");
+        dateCreatedElement.classList.add("date-created");
+
+        const dateCreated = new Date(0);
+        if(work.dateCreated.year >= 1000) {
+            dateCreated.setFullYear(work.dateCreated.year);
+        } else {
+            dateCreated.setYear(work.dateCreated.year);
+        }
+        dateCreated.setMonth(work.dateCreated.month - 1, work.dateCreated.day);
+        dateCreatedElement.textContent = new Intl.DateTimeFormat().format(dateCreated);
+
+        const topBar = document.createElement("div");
+        topBar.classList.add("top-bar");
+        topBar.appendChild(workType);
+        topBar.appendChild(dateCreatedElement);
+
+        if(typeof work.commission == "object") {
             elem.classList.add("commissioned");
 
             let commissioner = document.createElement("div");
             let commissionerName;
-            if(work.commissionerLink == null) {
+            if(work.commission.link == null) {
                 commissionerName = document.createElement("span");
             } else {
                 commissionerName = document.createElement("a");
-                commissionerName.setAttribute("href", work.commissionerLink);
+                commissionerName.setAttribute("href", work.commission.link);
             }
             commissioner.classList.add("commissioner");
-            commissionerName.textContent = work.commissioner ?? "an anonymous person";
+            commissionerName.textContent = work.commission.name ?? "an anonymous person";
             commissionerName.classList.add("commissioner-name");
 
             commissioner.appendChild(commissionerName);
 
-            elem.appendChild(workType);
+            elem.appendChild(topBar);
             elem.appendChild(image);
             elem.appendChild(caption);
             elem.appendChild(commissioner);
             commissionPieces.appendChild(elem);
         } else {
-            elem.appendChild(workType);
+            elem.appendChild(topBar);
             elem.appendChild(image);
             elem.appendChild(caption);
             generalArt.appendChild(elem);

@@ -23,6 +23,16 @@
     padding: 0.5em 1em;
     box-sizing: border-box;
 }
+
+.portfolio-image .top-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.portfolio-image .top-bar *:first-child::after {
+    content: "\2014";
+    margin: 0px 1ch;
+}
 .portfolio-image .image {
     height: 300px;
     width: fit-content;
