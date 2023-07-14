@@ -62,3 +62,17 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+
+@media only screen and (max-width: 600px) {
+    #content {
+        justify-content: start;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+}

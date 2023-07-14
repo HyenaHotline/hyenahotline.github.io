@@ -10,9 +10,11 @@
 .container.solid {
     backdrop-filter: blur(8px) brightness(0.75);
     padding: 1em;
+    box-sizing: border-box;
 }
 
 .display-container {
     padding: 0.5em;
     background: #0004;
+    box-sizing: border-box;
 }

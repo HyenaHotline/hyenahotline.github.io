@@ -13,3 +13,9 @@
     backdrop-filter: brightness(0.75);
     padding: 0.25em 0.5em;
 }
+
+@media only screen and (max-width: 600px) {
+    #prices-table {
+        font-size: 0.75em;
+    }
+}

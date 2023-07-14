@@ -33,5 +33,17 @@ export default [
             month: 6,
             day: 25
         }
+    },
+    {
+        filename: "ScottRenderedHalfbody.png",
+        caption: "Fully rendered halfbody of my fursona, Scott.",
+        description: "A 2795x2458 Fully Rendered Halfbody",
+        type: "Half-Body / Fully Shaded",
+
+        dateCreated: {
+            year: 2023,
+            month: 6,
+            day: 25
+        }
     }
 ]

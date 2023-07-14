@@ -14,6 +14,8 @@
     z-index: 10;
 
     overflow-x: hidden;
+
+    border-bottom: 2px solid #FF99A1;
 }
 
 #navigation-bar .navigation-page {
@@ -38,6 +40,7 @@
 
     pointer-events: none;
 }
+
 #navigation-bar .navigation-page::before {
     content: ">";
     right: 2em;
@@ -57,4 +60,15 @@
 
 #navigation-bar a {
     border: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #navigation-bar {
+        flex-direction: column;
+    }
+    
+    #navigation-bar .navigation-page {
+        padding-top: 0.1em;
+        padding-bottom: 0.1em;
+    }
 }

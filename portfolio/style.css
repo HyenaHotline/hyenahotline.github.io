@@ -7,6 +7,7 @@
 
 .portfolio-container {
     text-align: center;
+    box-sizing: border-box;
 }
 .display-container h1 {
     text-align: center;
@@ -47,4 +48,18 @@
 }
 .portfolio-image .commissioner::before {
     content: "Commissioned by ";
+}
+
+
+@media only screen and (max-width: 600px) {
+    .display-container {
+        width: 100%;
+    }
+    .portfolio-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        gap: 2em;
+    }
 }
