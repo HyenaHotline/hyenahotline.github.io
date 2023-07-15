@@ -37,7 +37,7 @@
 .portfolio-image .image {
     height: 300px;
     width: fit-content;
-    align-self: center
+    align-self: center;
 }
 
 .portfolio-image .commissioner {
@@ -61,5 +61,19 @@
         width: 100%;
 
         gap: 2em;
+    }
+    .portfolio-image {
+        width: 100%;
+        margin: 0;
+    }
+    .portfolio-image .image {
+        height: unset;
+        width: 100%;
+    }
+    .portfolio-image .top-bar {
+        flex-direction: column;
+    }
+    .portfolio-image .top-bar *:first-child::after {
+        display: none;
     }
 }
