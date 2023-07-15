@@ -18,3 +18,9 @@
     background: #0004;
     box-sizing: border-box;
 }
+
+@media only screen and (max-width: 600px) {
+    .container.solid {
+        padding: 0.5em;
+    }
+}

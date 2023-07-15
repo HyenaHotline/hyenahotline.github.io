@@ -17,5 +17,7 @@
 @media only screen and (max-width: 600px) {
     #prices-table {
         font-size: 0.75em;
+        padding: 0px;
+        /* background: none; */
     }
 }
